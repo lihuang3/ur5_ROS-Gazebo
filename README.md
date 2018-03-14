@@ -1,5 +1,11 @@
 #### 0. References
-- [`GitHub: utecrobotics/ur5`](https://github.com/utecrobotics/ur5)
+- [__`GitHub: utecrobotics/ur5`__](https://github.com/utecrobotics/ur5) testing ur5 motion 
+
+- [__`Tutorial: Using a URDF in Gazebo`__](http://gazebosim.org/tutorials/?tut=ros_urdf#Tutorial:UsingaURDFinGazebo)
+prerequisite for Gazebo plugins
+    
+- [__`Tutorial: Using Gazebo plugins with ROS`__](http://gazebosim.org/tutorials?tut=ros_gzplugins)
+learning to use Gazebo plugins
 
 #### 1. Universal Robot 5 Installation
 [`Official installation tutorial`](http://wiki.ros.org/universal_robot)
