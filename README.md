@@ -1,11 +1,7 @@
 #### 0. References
 - [__`GitHub: utecrobotics/ur5`__](https://github.com/utecrobotics/ur5) testing ur5 motion 
 
-- [__`Tutorial: Using a URDF in Gazebo`__](http://gazebosim.org/tutorials/?tut=ros_urdf#Tutorial:UsingaURDFinGazebo)
-prerequisite for Gazebo plugins
-    
-- [__`Tutorial: Using Gazebo plugins with ROS`__](http://gazebosim.org/tutorials?tut=ros_gzplugins)
-learning to use Gazebo plugins
+
 
 #### 1. Universal Robot 5 Installation
 [`Official installation tutorial`](http://wiki.ros.org/universal_robot)
@@ -69,7 +65,7 @@ PATH: /src/universal_robot/ur_description/urdf/ur5.urdf.xacro
 
 ```
 
-#### 3 USB CAM Installation in ROS
+#### 3 USB Camera Installation in ROS
 [`Reference link`](https://answers.ros.org/question/197651/how-to-install-a-driver-like-usb_cam/)
 
 To list all video devices picked up by the kernel
@@ -124,3 +120,17 @@ run the following command in ur5_ws folder (`source devel/setup.bash`)
 ```angularjs
 rosrun usb_cam usb_cam_node
 ```
+
+#### 4. Using Gazebo Camera Plugins
+
+- [__`Tutorial: Using a URDF in Gazebo`__](http://gazebosim.org/tutorials/?tut=ros_urdf#Tutorial:UsingaURDFinGazebo)
+prerequisite for Gazebo plugins
+    
+- [__`Tutorial: Using Gazebo plugins with ROS`__](http://gazebosim.org/tutorials?tut=ros_gzplugins)
+learning to use Gazebo plugins
+
+
+- [__`Viewer for ROS image topics`__](http://wiki.ros.org/image_view)
+
+
+- [__`Camera implementation with IRIS drone`__](http://discuss.px4.io/t/how-to-add-a-ros-camera-to-iris-for-gazebo-simulation/5118)
