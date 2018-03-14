@@ -123,14 +123,14 @@ rosrun usb_cam usb_cam_node
 
 #### 4. Using Gazebo Camera Plugins
 
-- [__`Tutorial: Using a URDF in Gazebo`__](http://gazebosim.org/tutorials/?tut=ros_urdf#Tutorial:UsingaURDFinGazebo)
+- [`Tutorial: Using a URDF in Gazebo`](http://gazebosim.org/tutorials/?tut=ros_urdf#Tutorial:UsingaURDFinGazebo)
 prerequisite for Gazebo plugins
     
-- [__`Tutorial: Using Gazebo plugins with ROS`__](http://gazebosim.org/tutorials?tut=ros_gzplugins)
+- [`Tutorial: Using Gazebo plugins with ROS`](http://gazebosim.org/tutorials?tut=ros_gzplugins)
 learning to use Gazebo plugins
 
 
-- [__`Viewer for ROS image topics`__](http://wiki.ros.org/image_view)
+- [`Viewer for ROS image topics`](http://wiki.ros.org/image_view)
 
 
-- [__`Camera implementation with IRIS drone`__](http://discuss.px4.io/t/how-to-add-a-ros-camera-to-iris-for-gazebo-simulation/5118)
+- [`Camera implementation with IRIS drone`](http://discuss.px4.io/t/how-to-add-a-ros-camera-to-iris-for-gazebo-simulation/5118)
