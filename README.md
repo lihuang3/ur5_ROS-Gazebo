@@ -38,7 +38,7 @@ roslaunch ur5_moveit_config ur5_moveit_planning_execution.launch sim:=true limit
 
 roslaunch ur5_moveit_config moveit_rviz.launch config:=true
 ```
-To test UR5 motion, run [`testmotion.py`](testmotion.py)
+To test UR5 motion, run [`testmotion.py`](src/testmotion.py)
 
 
 #### 2. Moveit
@@ -156,6 +156,8 @@ choose a proper frame (e. g. __`world`__)
 
 Next, we want to view the 3D model of the robot. To accomplish this, we will insert an instance of the `robot model` plugin
 To add the robot model to the rviz scene, click the “Add” button and choose __`RobotModel`__
+
+To test UR5 USB cam, run [`testvision.py`](src/testvision.py)
 
 <p align="center">
 <img src="https://github.com/lihuang3/ur5_notebook/blob/master/media/ezgif.com-video-to-gif.gif" width="600">
