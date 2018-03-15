@@ -1,6 +1,6 @@
 #### 0. References
 - [__`GitHub: utecrobotics/ur5`__](https://github.com/utecrobotics/ur5) testing ur5 motion 
-
+- [__`Very useful ROS blog`__](http://www.guyuehome.com/column/ros-explore) ROS探索
 
 
 #### 1. Universal Robot 5 Installation
@@ -134,3 +134,68 @@ learning to use Gazebo plugins
 
 
 - [`Camera implementation with IRIS drone`](http://discuss.px4.io/t/how-to-add-a-ros-camera-to-iris-for-gazebo-simulation/5118)
+
+
+- [`ur_description wiki`](http://wiki.ros.org/ur_description)
+To view and manipulate the arm models in rviz, install the package from package management and launch the following:
+```angularjs
+roslaunch ur_description ur5_upload.launch
+roslaunch ur_description test.launch
+```
+You probably need to install urdf_tutorial:
+```angularjs
+cd ~/catkin_ws/src/
+git clone https://github.com/ros/urdf_tutorial
+cd ..
+catkin_make
+source devel/setup.bash
+```
+
+In rviz, the first task	is to choose the frame of reference	for	the	visualization. In left panel, __`Global Options/Fixed Frame`__, 
+choose a proper frame (e. g. __`world`__)
+
+Next, we want to view the 3D model of the robot. To accomplish this, we will insert an instance of the `robot model` plugin
+To add the robot model to the rviz scene, click the “Add” button and choose __`RobotModel`__
+
+<p align="center">
+<img src="https://github.com/RoboticSwarmControl/JanusParticleControl/blob/master/Media/OpenloopLP.gif" width="600">
+</p>
+ 	
+#### 5. Revolute-Revolute Manipulator Robot
+"[__`RRBot`__](https://github.com/ros-simulation/gazebo_ros_demos), or ''Revolute-Revolute Manipulator Robot'', 
+is a simple 3-linkage, 2-joint arm that we will use to demonstrate various 
+features of Gazebo and URDFs. 
+It essentially a double inverted pendulum and demonstrates some fun 
+control concepts within a simulator."
+
+To get RRBot, clone the gazebo_ros_demos Github repo into the `/src` folder of your catkin workspace and rebuild your workspace:
+```angularjs
+cd ~/catkin_ws/src/
+git clone https://github.com/ros-simulation/gazebo_ros_demos.git
+cd ..
+catkin_make
+source devel/setup.bash
+```
+
+__Quick start__
+
+Rviz:
+```angularjs
+roslaunch rrbot_description rrbot_rviz.launch
+```
+
+Gazebo:
+```angularjs
+roslaunch rrbot_gazebo rrbot_world.launch
+```
+
+[ROS Control](http://gazebosim.org/tutorials?tut=ros_control):
+```angularjs
+roslaunch rrbot_control rrbot_control.launch
+```
+Example of Moving Joints:
+```angularjs
+rostopic pub /rrbot/joint2_position_controller/command std_msgs/Float64 "data: -0.9"
+```
+
+
