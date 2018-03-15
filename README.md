@@ -158,7 +158,7 @@ Next, we want to view the 3D model of the robot. To accomplish this, we will ins
 To add the robot model to the rviz scene, click the “Add” button and choose __`RobotModel`__
 
 <p align="center">
-<img src="https://github.com/RoboticSwarmControl/JanusParticleControl/blob/master/Media/OpenloopLP.gif" width="600">
+<img src="https://github.com/lihuang3/ur5_notebook/blob/master/media/ezgif.com-video-to-gif.gif" width="600">
 </p>
  	
 #### 5. Revolute-Revolute Manipulator Robot
