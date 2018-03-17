@@ -1,7 +1,6 @@
 #### 0. References
 - [__`GitHub: utecrobotics/ur5`__](https://github.com/utecrobotics/ur5) testing ur5 motion 
 - [__`Very useful ROS blog`__](http://www.guyuehome.com/column/ros-explore) ROS探索
- 
 - [__`ROS下如何使用moveit驱动UR5机械臂`__](http://blog.csdn.net/jayandchuxu/article/details/54693870)
 
 #### 1. Universal Robot 5 Installation
