@@ -40,7 +40,7 @@ roslaunch ur5_moveit_config ur5_moveit_planning_execution.launch sim:=true limit
 roslaunch ur5_moveit_config moveit_rviz.launch config:=true
 ```
 To test UR5 motion, run [`testmotion.py`](src/testmotion.py)
-
+Look into this link for [`straight line motion`](http://answers.gazebosim.org/question/15402/ur5-straight-line-motion/)
 
 #### 2. Moveit
 [`Official tutorial`](http://docs.ros.org/kinetic/api/moveit_tutorials/html/)
