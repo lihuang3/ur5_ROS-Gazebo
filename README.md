@@ -147,7 +147,46 @@ run the following command in ur5_ws folder (`source devel/setup.bash`)
 rosrun usb_cam usb_cam_node
 ```
 
-#### 4. Using Gazebo Camera Plugins
+ 	
+#### 4. Revolute-Revolute Manipulator Robot
+"[__`RRBot`__](https://github.com/ros-simulation/gazebo_ros_demos), or ''Revolute-Revolute Manipulator Robot'', 
+is a simple 3-linkage, 2-joint arm that we will use to demonstrate various 
+features of Gazebo and URDFs. 
+It essentially a double inverted pendulum and demonstrates some fun 
+control concepts within a simulator."
+
+To get RRBot, clone the gazebo_ros_demos Github repo into the `/src` folder of your catkin workspace and rebuild your workspace:
+```angularjs
+cd ~/catkin_ws/src/
+git clone https://github.com/ros-simulation/gazebo_ros_demos.git
+cd ..
+catkin_make
+source devel/setup.bash
+```
+
+__Quick start__
+
+Rviz:
+```angularjs
+roslaunch rrbot_description rrbot_rviz.launch
+```
+
+Gazebo:
+```angularjs
+roslaunch rrbot_gazebo rrbot_world.launch
+```
+
+[ROS Control](http://gazebosim.org/tutorials?tut=ros_control):
+```angularjs
+roslaunch rrbot_control rrbot_control.launch
+```
+Example of Moving Joints:
+```angularjs
+rostopic pub /rrbot/joint2_position_controller/command std_msgs/Float64 "data: -0.9"
+```
+
+
+#### 5. Using Gazebo Camera Plugins
 
 - [`Tutorial: Using a URDF in Gazebo`](http://gazebosim.org/tutorials/?tut=ros_urdf#Tutorial:UsingaURDFinGazebo)
 prerequisite for Gazebo plugins
@@ -188,42 +227,3 @@ To test UR5 USB cam, run [`testvision.py`](src/testvision.py)
 <p align="center">
 <img src="https://github.com/lihuang3/ur5_notebook/blob/master/media/JointSpaceMotionCamera.gif" width="800">
 </p>
- 	
-#### 5. Revolute-Revolute Manipulator Robot
-"[__`RRBot`__](https://github.com/ros-simulation/gazebo_ros_demos), or ''Revolute-Revolute Manipulator Robot'', 
-is a simple 3-linkage, 2-joint arm that we will use to demonstrate various 
-features of Gazebo and URDFs. 
-It essentially a double inverted pendulum and demonstrates some fun 
-control concepts within a simulator."
-
-To get RRBot, clone the gazebo_ros_demos Github repo into the `/src` folder of your catkin workspace and rebuild your workspace:
-```angularjs
-cd ~/catkin_ws/src/
-git clone https://github.com/ros-simulation/gazebo_ros_demos.git
-cd ..
-catkin_make
-source devel/setup.bash
-```
-
-__Quick start__
-
-Rviz:
-```angularjs
-roslaunch rrbot_description rrbot_rviz.launch
-```
-
-Gazebo:
-```angularjs
-roslaunch rrbot_gazebo rrbot_world.launch
-```
-
-[ROS Control](http://gazebosim.org/tutorials?tut=ros_control):
-```angularjs
-roslaunch rrbot_control rrbot_control.launch
-```
-Example of Moving Joints:
-```angularjs
-rostopic pub /rrbot/joint2_position_controller/command std_msgs/Float64 "data: -0.9"
-```
-
-
