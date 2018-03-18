@@ -87,13 +87,23 @@ class MoveItCartesianPath:
 
         # self.arm.set_pose_target(wpose)
 
-
         # Set the internal state to the current state
         self.arm.set_start_state_to_current_state()
 
         # Plan the Cartesian path connecting the waypoints
 
+        """moveit_commander.move_group.MoveGroupCommander.compute_cartesian_path(	 
+                self, waypoints, eef_step, jump_threshold, avoid_collisios= True)
+    
+           Compute a sequence of waypoints that make the end-effector move in straight line segments that follow the 
+           poses specified as waypoints. Configurations are computed for every eef_step meters; 
+           The jump_threshold specifies the maximum distance in configuration space between consecutive points 
+           in the resultingpath. The return value is a tuple: a fraction of how much of the path was followed, 
+           the actual RobotTrajectory. 
+
+        """
         plan, fraction = self.arm.compute_cartesian_path(waypoints, 0.01, 0.0, True)
+
 
         # plan = self.arm.plan()
 

@@ -43,7 +43,7 @@ Look into this link for [`straight line motion`](http://answers.gazebosim.org/qu
 
 #### 2. Moveit
 [`Official tutorial`](http://docs.ros.org/kinetic/api/moveit_tutorials/html/)
-Install Moveit 
+##### 2.0 Install Moveit 
 ```
 sudo apt-get install ros-kinetic-moveit
 ```
@@ -62,30 +62,50 @@ PATH: /src/universal_robot/ur_description/urdf/ur5.urdf.xacro
 
 3. Move Group Python InterFace Tutorial[`Official tutorial`](http://docs.ros.org/indigo/api/moveit_tutorials/html/doc/pr2_tutorials/planning/scripts/doc/move_group_python_interface_tutorial.html)
 
-
 ```
+##### 2.1 Use Moveit Interface
+[`Move Group Interface Tutorial`](http://docs.ros.org/indigo/api/moveit_tutorials/html/doc/pr2_tutorials/planning/src/doc/move_group_interface_tutorial.html#cartesian-paths)
+
+##### 2.2 Use Moveit in Python
+[`Cartesian Path Planning`](src/motionplanner2.py)
+Using the ur5 with the MoveIt Motion Planning Framework for quick motion planning.
+Install the package from package management, and run the MoveIt! planning demo:
+
+```angularjs
+$ sudo apt-get install ros-kinetic-ur5-moveit-config
+
+$ roslaunch ur5_moveit_config demo.launch
+```
+Our goal is to move te universal robot(ur5) end effector moving in straight line (Cartesian path) with Moveit-Python environment.
+
+__References__ \
+[1] [CMobley7 commented on ros-planning/moveit_commander](https://github.com/ros-planning/moveit_commander/issues/51)\
+[2] [homesick-nick UR5CubicInterpolation](https://github.com/nick-pestell/UR5CubicInterpolation/blob/master/cubic_interpolation.py)\
+[3] [Move Group Python Interface Tutorial
+](http://docs.ros.org/kinetic/api/moveit_tutorials/html/doc/pr2_tutorials/planning/scripts/doc/move_group_python_interface_tutorial.html) \
+[4] [ur_modern_driver](https://github.com/ThomasTimm/ur_modern_driver) 
 
 #### 3 USB Camera Installation in ROS
 [`Reference link`](https://answers.ros.org/question/197651/how-to-install-a-driver-like-usb_cam/)
 
 To list all video devices picked up by the kernel
 ```angularjs
-ls -ltrh /dev/video*
+$ ls -ltrh /dev/video*
 ```
 
 
 ```angularjs
-cd ur5_ws/src
+$ cd ur5_ws/src
 
-git clone https://github.com/bosch-ros-pkg/usb_cam.git
+$ git clone https://github.com/bosch-ros-pkg/usb_cam.git
 
-cd ..
+$ cd ..
 
-catkin_make
+$ catkin_make
 
-source devel/setup.bash
+$ source devel/setup.bash
 
-roscd usb_cam
+$ roscd usb_cam
 
 # run `roscore` in a new terminal
 # Make sure a usb cam is connected
