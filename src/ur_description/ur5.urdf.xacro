@@ -13,7 +13,7 @@
   <xacro:property name="wrist_2_mass" value="1.2190" />
   <xacro:property name="wrist_3_mass" value="0.1879" />
   <xacro:property name="height3" value="1" /> <!-- Link 3 -->
-  <xacro:property name="camera_link" value="0.05" /> <!-- Size of square 'camera' box -->
+  <xacro:property name="camera_link" value="0.02" /> <!-- Size of square 'camera' box -->
   <xacro:property name="axel_offset" value="0.05" /> <!-- Space btw top of beam and the each joint -->
   <xacro:property name="shoulder_cog" value="0.0 0.00193 -0.02561" />
   <xacro:property name="upper_arm_cog" value="0.0 -0.024201 0.2125" />
