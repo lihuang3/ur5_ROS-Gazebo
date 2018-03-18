@@ -80,7 +80,7 @@ $ roslaunch ur5_moveit_config demo.launch
 Our goal is to move te universal robot(ur5) end effector moving in straight line (Cartesian path) with Moveit-Python interface.
 
 <p align="center">
-<img src="https://github.com/lihuang3/ur5_notebook/blob/master/media/ezgif.com-video-to-gif.gif" width="600">
+<img src="https://github.com/lihuang3/ur5_notebook/blob/master/media/CartesianPathCamera.gif" width="600">
 </p>
 
 
@@ -186,7 +186,7 @@ To add the robot model to the rviz scene, click the “Add” button and choose 
 To test UR5 USB cam, run [`testvision.py`](src/testvision.py)
 
 <p align="center">
-<img src="https://github.com/lihuang3/ur5_notebook/blob/master/media/ezgif.com-video-to-gif.gif" width="600">
+<img src="https://github.com/lihuang3/ur5_notebook/blob/master/media/JointSpaceMotionCamera.gif" width="600">
 </p>
  	
 #### 5. Revolute-Revolute Manipulator Robot
