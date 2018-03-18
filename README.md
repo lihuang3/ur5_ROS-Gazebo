@@ -68,6 +68,7 @@ PATH: /src/universal_robot/ur_description/urdf/ur5.urdf.xacro
 
 ##### 2.2 Use Moveit in Python
 [`Cartesian Path Planning`](src/motionplanner2.py)
+
 Using the ur5 with the MoveIt Motion Planning Framework for quick motion planning.
 Install the package from package management, and run the MoveIt! planning demo:
 
@@ -76,7 +77,12 @@ $ sudo apt-get install ros-kinetic-ur5-moveit-config
 
 $ roslaunch ur5_moveit_config demo.launch
 ```
-Our goal is to move te universal robot(ur5) end effector moving in straight line (Cartesian path) with Moveit-Python environment.
+Our goal is to move te universal robot(ur5) end effector moving in straight line (Cartesian path) with Moveit-Python interface.
+
+<p align="center">
+<img src="https://github.com/lihuang3/ur5_notebook/blob/master/media/ezgif.com-video-to-gif.gif" width="600">
+</p>
+
 
 __References__ \
 [1] [CMobley7 commented on ros-planning/moveit_commander](https://github.com/ros-planning/moveit_commander/issues/51)\
