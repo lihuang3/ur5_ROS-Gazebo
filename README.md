@@ -77,7 +77,7 @@ $ sudo apt-get install ros-kinetic-ur5-moveit-config
 
 $ roslaunch ur5_moveit_config demo.launch
 ```
-Our goal is to move te universal robot(ur5) end effector moving in straight line (Cartesian path) with Moveit-Python interface.
+Our goal is to move the universal robot (ur5) end effector moving in straight line (Cartesian path) with Moveit-Python interface.
 
 <p align="center">
 <img src="https://github.com/lihuang3/ur5_notebook/blob/master/media/CartesianPathCamera.gif" width="600">
