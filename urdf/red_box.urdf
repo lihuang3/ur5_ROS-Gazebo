@@ -5,14 +5,14 @@
   <collision>
     <origin xyz="0 0 0.02" rpy="0 0 0"/>
     <geometry>
-      <box size="0.25 0.15 0.05" />
+      <box size="0.1 0.075 0.025" />
     </geometry>
   </collision>
 
   <visual>
     <origin xyz="0 0 0.02" rpy="0 0 0"/>
     <geometry>
-      <box size="0.25 0.15 0.05" />
+      <box size="0.1 0.075 0.025" />
     </geometry>
   </visual>
 

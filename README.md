@@ -228,36 +228,18 @@ To test UR5 USB cam, run [`testvision.py`](src/testvision.py)
 <img src="https://github.com/lihuang3/ur5_notebook/blob/master/media/JointSpaceMotionCamera.gif" width="800">
 </p>
 
-#### 5. simulate world in gazebo
+#### 5. gazebo world Launch
 
 - [`Defining Joints in Solidworks to URDF Exporter for a Conveyor Belt`](https://answers.ros.org/question/52309/defining-joints-in-solidworks-to-urdf-exporter-for-a-conveyor-belt/)
 
 
 - [`Tutorial: simulator in gazebo`](http://wiki.ros.org/simulator_gazebo/Tutorials/Gazebo_ROS_API)
-Place the ur5_notebook folder under ros workspace folder. Foe Example: /home/ros_hw/src/ur5_notebook
 
-launch gazebo urdf files :
-1.Change the path in initialize. launch from:
-```angularjs
-<param name="red_box_path" type="str" value="/home/haoran/ros_hw/src/ur5_notebook/urdf/red_box.urdf"/>
-```
-to
-```angularjs
-<param name="red_box_path" type="str" value="/home/user_name/ros_hw/src/ur5_notebook/urdf/red_box.urdf"/>
-```
-2.cd to your ros workspace.
-```angularjs
-source devel/setup.bash
-catkin_make
-```
-3.launch the gazebo world
+launch gazebo files :
 ```angularjs
 roslaunch ur5_notebook initialize.launch
 ```
-4.change object pose and twist with command line if you want to:
+change object pose and twist with command line:
 ```angularjs
 rosservice call /gazebo/set_model_state '{model_state: { model_name: red_box, pose: { position: { x: 0, y: 0 ,z: 1 }, orientation: {x: 0, y: 0, z: 0, w: 0 } }, twist: { linear: {x: 0.1 , y: 0 ,z: 0 } , angular: { x: 0.0 , y: 0 , z: 0.0 } } , reference_frame: world } }'
 ```
-<p align="center">
-<img src="https://github.com/lihuang3/ur5_notebook/blob/master/media/conveyor.gif" width="500">
-</p>
