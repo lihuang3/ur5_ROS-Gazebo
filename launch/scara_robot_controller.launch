@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<launch>
+
+  <!-- Load joint controller configurations from YAML file to parameter server -->
+  <rosparam file="$(find two_scara_collaboration)/config/scara_robot_left_control.yaml" command="load"/>
+
+  <!-- load the controllers -->
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+    output="screen" ns="/scara_robot_left" args="joint1_position_controller joint2_position_controller joint_state_controller">
+    <remap from="/scara_robot_left/robot_description" to="/robot_description" />
+  </node>
+
+
+  <!-- convert joint states to TF transforms for rviz, etc -->
+<!--   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
+    respawn="false" output="screen">
+    <remap from="/robot_description" to="/scara_robot_left/robot_description" />
+  </node> -->
+
+
+
+
+
+
+</launch>
+

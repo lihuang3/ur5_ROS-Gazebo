@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<launch>
+  <param name="red_box_path" type="str" value="/home/haoran/ros_hw/src/ur5_notebook/urdf/red_box.urdf"/>
+
+  <arg name="limited" default="true"/>
+  <arg name="paused" default="false"/>
+  <arg name="gui" default="true"/>
+  <arg name="debug" default="false" />
+  <arg name="sim" default="true" />
+
+  <!-- startup simulated world -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" default="worlds/empty.world"/>
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="gui" value="$(arg gui)"/>
+  </include>
+
+  <!-- spwan ur5 -->
+  <!-- send robot urdf to param server -->
+  <include file="$(find ur_description)/launch/ur5_upload.launch">
+    <arg name="limited" value="$(arg limited)"/>
+  </include>
+
+  <!-- push robot_description to factory and spawn robot in gazebo -->
+  <node name="spawn_gazebo_model" pkg="gazebo_ros" type="spawn_model" args="-urdf -param robot_description -model robot -z 0.2 -y 0.7" respawn="false" output="screen" />
+
+  <include file="$(find ur_gazebo)/launch/controller_utils.launch"/>
+
+  <rosparam file="$(find ur_gazebo)/controller/arm_controller_ur5.yaml" command="load"/>
+  <node name="arm_controller_spawner" pkg="controller_manager" type="controller_manager" args="spawn arm_controller" respawn="false" output="screen"/>
+
+  <!-- Remap follow_joint_trajectory -->
+  <remap if="$(arg sim)" from="/follow_joint_trajectory" to="/arm_controller/follow_joint_trajectory"/>
+
+  <!-- Launch moveit -->
+  <include file="$(find ur5_moveit_config)/launch/move_group.launch">
+    <arg name="limited" default="$(arg limited)"/>
+    <arg name="debug" default="$(arg debug)" />
+  </include>
+
+  <!-- spawn the conveyor_belt in gazebo -->
+  <node name="spawn_conveyor_belt" pkg="gazebo_ros" type="spawn_model" args="-file $(find ur5_notebook)/urdf/conveyor_belt.urdf -urdf -model conveyor_belt" />
+  <!-- the cylinder blocks spawner node -->
+  <node name="blocks_spawner" pkg="ur5_notebook" type="blocks_spawner" output="screen" />
+
+  <!-- the cylinder poses publisher node -->
+  <node name="blocks_poses_publisher" pkg="ur5_notebook" type="blocks_poses_publisher" output="screen" />
+
+
+  <!-- for ros control to be used with scara robot -->
+<!--   <param name="/scara_robot_left/robot_description" textfile="$(find two_scara_collaboration)/urdf/scara_robot_left.urdf" /> -->
+
+<!-- spawn the red_box in gazebo -->
+<!-- node name="spawn_red_box" pkg="gazebo_ros" type="spawn_model" args="-file $(find ur5_notebook)/urdf/red_box.urdf -urdf -model red_box"/ -->
+
+
+</launch>
