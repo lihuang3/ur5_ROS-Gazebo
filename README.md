@@ -1,3 +1,13 @@
+open sequence:
+launch gazebo files :
+```angularjs
+roslaunch ur5_notebook initialize.launch
+```
+cd python node folder:
+```angularjs
+python testvisionplanner.py
+```
+
 #### 0. References
 - [__`GitHub: utecrobotics/ur5`__](https://github.com/utecrobotics/ur5) testing ur5 motion
 - [__`Very useful ROS blog`__](http://www.guyuehome.com/column/ros-explore) ROS探索
@@ -243,3 +253,10 @@ change object pose and twist with command line:
 ```angularjs
 rosservice call /gazebo/set_model_state '{model_state: { model_name: red_box, pose: { position: { x: 0, y: 0 ,z: 1 }, orientation: {x: 0, y: 0, z: 0, w: 0 } }, twist: { linear: {x: 0.1 , y: 0 ,z: 0 } , angular: { x: 0.0 , y: 0 , z: 0.0 } } , reference_frame: world } }'
 ```
+
+#### 6. openCV
+- [`Detect red circles in an image using OpenCV
+`](https://solarianprogrammer.com/2015/05/08/detect-red-circles-image-using-opencv/)
+
+- [`OpenCV moment
+`](https://docs.opencv.org/3.1.0/dd/d49/tutorial_py_contour_features.html)

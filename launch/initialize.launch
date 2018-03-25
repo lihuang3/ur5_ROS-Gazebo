@@ -47,8 +47,8 @@
   <node name="blocks_poses_publisher" pkg="ur5_notebook" type="blocks_poses_publisher" output="screen" />
 
   <!-- the cylinder poses publisher node -->
-  <node name="testvision" pkg="ur5_notebook" type="testvision.py" output="screen" />
-
+<!--  <node name="vision_follower" pkg="ur5_notebook" type="vision_follower.py" output="screen" />
+-->
 
   <!-- for ros control to be used with scara robot -->
 <!--   <param name="/scara_robot_left/robot_description" textfile="$(find two_scara_collaboration)/urdf/scara_robot_left.urdf" /> -->

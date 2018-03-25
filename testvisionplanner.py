@@ -27,16 +27,19 @@ import moveit_commander
 from copy import deepcopy
 import geometry_msgs.msg
 import moveit_msgs.msg
+import cv2, cv_bridge
+from sensor_msgs.msg import Image
 
 
 from std_msgs.msg import Header
-
 from trajectory_msgs.msg import JointTrajectory
-
 from trajectory_msgs.msg import JointTrajectoryPoint
 
 class MoveItCartesianPath:
     def __init__(self):
+        self.bridge = cv_bridge.CvBridge()
+        self.image_sub = rospy.Subscriber('/ur5/usbcam/image_raw', Image, self.image_callback)
+
         rospy.init_node("moveit_cartesian_path", anonymous=False)
 
         rospy.loginfo("Starting node moveit_cartesian_path")
@@ -88,7 +91,7 @@ class MoveItCartesianPath:
 
         wpose.orientation.x = 0.4811
         wpose.orientation.y = 0.4994
-        wpose.orientation.z = -0.5121	
+        wpose.orientation.z = -0.5121
 	wpose.orientation.w = 0.5069
 
         waypoints.append(deepcopy(wpose))
@@ -103,14 +106,14 @@ class MoveItCartesianPath:
 
         # Plan the Cartesian path connecting the waypoints
 
-        """moveit_commander.move_group.MoveGroupCommander.compute_cartesian_path(	 
+        """moveit_commander.move_group.MoveGroupCommander.compute_cartesian_path(
                 self, waypoints, eef_step, jump_threshold, avoid_collisios= True)
-    
-           Compute a sequence of waypoints that make the end-effector move in straight line segments that follow the 
-           poses specified as waypoints. Configurations are computed for every eef_step meters; 
-           The jump_threshold specifies the maximum distance in configuration space between consecutive points 
-           in the resultingpath. The return value is a tuple: a fraction of how much of the path was followed, 
-           the actual RobotTrajectory. 
+
+           Compute a sequence of waypoints that make the end-effector move in straight line segments that follow the
+           poses specified as waypoints. Configurations are computed for every eef_step meters;
+           The jump_threshold specifies the maximum distance in configuration space between consecutive points
+           in the resultingpath. The return value is a tuple: a fraction of how much of the path was followed,
+           the actual RobotTrajectory.
 
         """
         plan, fraction = self.arm.compute_cartesian_path(waypoints, 0.01, 0.0, True)
@@ -139,9 +142,31 @@ class MoveItCartesianPath:
         moveit_commander.roscpp_shutdown()
         moveit_commander.os._exit(0)
 
-if __name__ == "__main__":
-    try:
-        MoveItCartesianPath()
-    except KeyboardInterrupt:
-        print "Shutting down MoveItCartesianPath node."
+    def image_callback(self,msg):
+        # BEGIN BRIDGE
+        image = self.bridge.imgmsg_to_cv2(msg,desired_encoding='bgr8')
+        # END BRIDGE
+        # BEGIN HSV
+        hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+        # END HSV
+        # BEGIN FILTER
+        lower_red = np.array([ 0,  100, 100])
+        upper_red = np.array([10, 255, 255])
+        mask = cv2.inRange(hsv, lower_red, upper_red)
 
+        #BEGIN FINDER
+        M = cv2.moments(mask)
+        if M['m00'] > 0:
+          cx = int(M['m10']/M['m00'])
+          cy = int(M['m01']/M['m00'])
+        # END FINDER
+        # BEGIN circle
+          cv2.circle(image, (cx, cy), 10, (0,0,0), -1)
+          #END circle
+
+        cv2.namedWindow("window", 1)
+        cv2.imshow("window", image )
+        cv2.waitKey(5)
+
+follower=MoveItCartesianPath()
+rospy.spin()
