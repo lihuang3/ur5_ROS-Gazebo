@@ -260,3 +260,9 @@ rosservice call /gazebo/set_model_state '{model_state: { model_name: red_box, po
 
 - [`OpenCV moment
 `](https://docs.opencv.org/3.1.0/dd/d49/tutorial_py_contour_features.html)
+
+- [`OpenCV moment
+`](https://docs.opencv.org/3.4.0/dd/d49/tutorial_py_contour_features.html)
+
+- [`cv2.contourArea() examples
+`](https://www.programcreek.com/python/example/86843/cv2.contourArea)

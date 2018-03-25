@@ -148,20 +148,38 @@ class MoveItCartesianPath:
         # END BRIDGE
         # BEGIN HSV
         hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+
         # END HSV
         # BEGIN FILTER
         lower_red = np.array([ 0,  100, 100])
         upper_red = np.array([10, 255, 255])
         mask = cv2.inRange(hsv, lower_red, upper_red)
-
+        (_, cnts, _) = cv2.findContours(mask.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        #area = cv2.contourArea(cnts)
+        h, w, d = image.shape
+        # print h, w, d  (800,800,3)
         #BEGIN FINDER
         M = cv2.moments(mask)
         if M['m00'] > 0:
           cx = int(M['m10']/M['m00'])
           cy = int(M['m01']/M['m00'])
+
+        # cx range (55,750) cy range( 55, ~ )
         # END FINDER
+        # Isolate largest contour
+        #  contour_sizes = [(cv2.contourArea(contour), contour) for contour in cnts]
+        #  biggest_contour = max(contour_sizes, key=lambda x: x[0])[1]
+          for i, c in enumerate(cnts):
+              area = cv2.contourArea(c)
+              if area > 7500:
+                  cv2.circle(image, (cx, cy), 10, (0,0,0), -1)
+                  cv2.putText(image, "({}, {})".format(int(cx), int(cy)), (int(cx-5), int(cy+15)), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1)
+                  cv2.drawContours(image, cnts, -1, (255, 255, 255),1)
         # BEGIN circle
-          cv2.circle(image, (cx, cy), 10, (0,0,0), -1)
+
+        #  print max(contour_sizes)[0]
+          #area = cv2.contourArea(cnts)
+          #print area
           #END circle
 
         cv2.namedWindow("window", 1)
