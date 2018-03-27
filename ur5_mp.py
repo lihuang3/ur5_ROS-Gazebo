@@ -25,9 +25,10 @@
 import rospy, sys, numpy as np
 import moveit_commander
 from copy import deepcopy
-from geometry_msgs.msg import Twist
+import geometry_msgs.msg
 import moveit_msgs.msg
 from sensor_msgs.msg import Image
+from ur5_notebook.msg import Tracker
 
 
 from std_msgs.msg import Header
@@ -39,11 +40,10 @@ from trajectory_msgs.msg import JointTrajectoryPoint
 class ur5_mp:
     def __init__(self):
         rospy.init_node("ur5_mp", anonymous=False)
-        self.cxy_sub = rospy.Subscriber('cxy', Twist, self.tracking_callback, queue_size=1)
+        self.cxy_sub = rospy.Subscriber('cxy', Tracker, self.tracking_callback, queue_size=1)
 
         self.track_flag = False
         self.default_pose_flag = True
-        self.area_flag = 0.0
         self.cx = 400.0
         self.cy = 400.0
         self.points=[]
@@ -153,11 +153,11 @@ class ur5_mp:
         moveit_commander.os._exit(0)
 
     def tracking_callback(self, msg):
-        self.track_flag = bool(msg.linear.z)
-        self.cx = msg.linear.x
-        self.cy = msg.linear.y
-        self.error_x = msg.angular.x
-        self.error_y = msg.angular.y
+        self.track_flag = msg.flag1
+        self.cx = msg.x
+        self.cy = msg.y
+        self.error_x = msg.error_x
+        self.error_y = msg.error_y
 
         if (self.track_flag and -0.4 < self.waypoints[0].position.x and self.waypoints[0].position.x < 0.6):
             self.execute()

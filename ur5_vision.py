@@ -25,7 +25,8 @@
 import rospy, sys, numpy as np
 import moveit_commander
 from copy import deepcopy
-from geometry_msgs.msg import Twist
+import geometry_msgs.msg
+from ur5_notebook.msg import Tracker
 import moveit_msgs.msg
 import cv2, cv_bridge
 from sensor_msgs.msg import Image
@@ -34,18 +35,17 @@ from sensor_msgs.msg import Image
 from std_msgs.msg import Header
 from trajectory_msgs.msg import JointTrajectory
 from trajectory_msgs.msg import JointTrajectoryPoint
-twist = Twist()
+tracker = Tracker()
 class ur5_vision:
     def __init__(self):
         rospy.init_node("ur5_vision", anonymous=False)
-        self.track_flag = 0.0
-        self.default_pose_flag = 1.0
-        self.area_flag = 0.0
+        self.track_flag = False
+        self.default_pose_flag = True
         self.cx = 400.0
         self.cy = 400.0
         self.bridge = cv_bridge.CvBridge()
         self.image_sub = rospy.Subscriber('/ur5/usbcam/image_raw', Image, self.image_callback)
-        self.cxy_pub = rospy.Publisher('cxy', Twist, queue_size=1)
+        self.cxy_pub = rospy.Publisher('cxy', Tracker, queue_size=1)
 
 
     def image_callback(self,msg):
@@ -79,16 +79,16 @@ class ur5_vision:
                 area = cv2.contourArea(c)
 
                 if area > 7500:
-                    self.track_flag = 1.0
+                    self.track_flag = True
                     self.cx = cx
                     self.cy = cy
                     self.error_x = self.cx - w/2
                     self.error_y = self.cy - h/2
-                    twist.linear.x = cx
-                    twist.linear.y = cy
-                    twist.linear.z = self.track_flag
-                    twist.angular.x = self.error_x
-                    twist.angular.y = self.error_y
+                    tracker.x = cx
+                    tracker.y = cy
+                    tracker.flag1 = self.track_flag
+                    tracker.error_x = self.error_x
+                    tracker.error_y = self.error_y
                     #(_,_,w_b,h_b)=cv2.boundingRect(c)
                     #print w_b,h_b
                     # BEGIN circle
@@ -98,11 +98,11 @@ class ur5_vision:
                     #BGIN CONTROL
                     break
                 else:
-                    self.track_flag = 0.0
-                    twist.linear.z = self.track_flag
+                    self.track_flag = False
+                    tracking_info.flag1 = self.track_flag
 
 
-        self.cxy_pub.publish(twist)
+        self.cxy_pub.publish(tracker)
         cv2.namedWindow("window", 1)
         cv2.imshow("window", image )
         cv2.waitKey(1)

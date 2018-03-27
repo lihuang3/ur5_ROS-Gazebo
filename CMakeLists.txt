@@ -5,15 +5,16 @@ cmake_minimum_required(VERSION 2.8.3)
 project(ur5_notebook)
 
 # Find the catkin build system, and any other packages on which we depend.
-find_package(catkin REQUIRED COMPONENTS gazebo_msgs roscpp geometry_msgs turtlesim std_srvs std_msgs message_generation message_runtime)
+find_package(catkin REQUIRED COMPONENTS gazebo_msgs roscpp geometry_msgs turtlesim std_srvs std_msgs message_generation)
 # Declare our catkin package.
 
 #add_message files
 add_message_files(FILES blocks_poses.msg)
+add_message_files(FILES Tracker.msg)
 
 generate_messages(DEPENDENCIES std_msgs)
 
-catkin_package()
+catkin_package(CATKIN_DEPENDS message_runtime)
 
 # Specify locations of header files.
 include_directories(include ${catkin_INCLUDE_DIRS})
