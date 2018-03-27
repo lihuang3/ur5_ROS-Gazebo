@@ -99,7 +99,7 @@ class ur5_vision:
                     break
                 else:
                     self.track_flag = False
-                    tracking_info.flag1 = self.track_flag
+                    tracker.flag1 = self.track_flag
 
 
         self.cxy_pub.publish(tracker)
