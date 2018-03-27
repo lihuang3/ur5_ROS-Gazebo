@@ -114,7 +114,7 @@
           std::string index = intToString(i);
           std::string model_name;
 
-          spawn_model_req.initial_pose.position.y = (float)rand()/(float)(RAND_MAX) * 0.8 - 0.4;  // random between -0.4 to 0.4
+          spawn_model_req.initial_pose.position.y = (float)rand()/(float)(RAND_MAX) * 0.4;  // random between -0.4 to 0.4
           ROS_INFO_STREAM("y position of new box: "
           << spawn_model_req.initial_pose.position.y);
 
