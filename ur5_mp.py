@@ -190,8 +190,9 @@ class ur5_mp:
 
             wpose.position.x -= self.error_x*0.08/105
             wpose.position.y += self.error_y*0.08/105
-            if wpose.position.z>0.30:
-                wpose.position.z -= 0.05
+            wpose.position.z = 0.2
+            #if wpose.position.z>0.30:
+            #    wpose.position.z -= 0.05
             #wpose.position.z = 0.4005
 
             wpose.orientation.x = 0.4811
