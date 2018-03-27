@@ -74,6 +74,9 @@ class ur5_mp:
         # Allow some leeway in position (meters) and orientation (radians)
         self.arm.set_goal_position_tolerance(0.01)
         self.arm.set_goal_orientation_tolerance(0.1)
+        self.arm.set_planning_time(0.1)
+        self.arm.set_max_acceleration_scaling_factor(1)
+        self.arm.set_max_velocity_scaling_factor(1)
 
         # Get the current pose so we can add it as a waypoint
         start_pose = self.arm.get_current_pose(self.end_effector_link).pose
@@ -172,10 +175,7 @@ class ur5_mp:
 
     def execute(self):
         if self.track_flag:
-            #print max(contour_sizes)[0]
-            #area = cv2.contourArea(cnts)
-            #print area
-            #END circle
+
             # Get the current pose so we can add it as a waypoint
             start_pose = self.arm.get_current_pose(self.end_effector_link).pose
 
@@ -189,10 +189,8 @@ class ur5_mp:
             # Set the next waypoint to the right 0.5 meters
 
             wpose.position.x -= self.error_x*0.08/105
-            wpose.position.y += self.error_y*0.08/105
-            wpose.position.z = 0.2
-            #if wpose.position.z>0.30:
-            #    wpose.position.z -= 0.05
+            wpose.position.y += self.error_y*0.04/105
+            wpose.position.z = 0.20
             #wpose.position.z = 0.4005
 
             wpose.orientation.x = 0.4811
@@ -203,9 +201,10 @@ class ur5_mp:
 
             self.waypoints.append(deepcopy(wpose))
             self.points.append(deepcopy(wpose))
-            print "tracking ",
-            print self.points
+
             # Set the internal state to the current state
+            # self.arm.set_pose_target(wpose)
+
             self.arm.set_start_state_to_current_state()
 
             # Plan the Cartesian path connecting the waypoints
@@ -221,7 +220,6 @@ class ur5_mp:
 
             """
             plan, fraction = self.arm.compute_cartesian_path(self.waypoints, 0.01, 0.0, True)
-
 
             # plan = self.arm.plan()
 
@@ -256,9 +254,11 @@ class ur5_mp:
             wpose.orientation.z = -0.5121
             wpose.orientation.w = 0.5069
 
-
+            self.points.append(deepcopy(wpose))
             self.waypoints.append(deepcopy(wpose))
             # Set the internal state to the current state
+            # self.arm.set_pose_target(wpose)
+
             self.arm.set_start_state_to_current_state()
 
             # Plan the Cartesian path connecting the waypoints
@@ -287,7 +287,7 @@ class ur5_mp:
                 rospy.loginfo("Path execution complete.")
             else:
                 rospy.loginfo("Path planning failed")
-
+        # print self.points
 
 
 
