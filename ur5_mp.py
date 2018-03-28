@@ -29,11 +29,12 @@ import geometry_msgs.msg
 import moveit_msgs.msg
 from sensor_msgs.msg import Image
 from ur5_notebook.msg import Tracker
-
-
 from std_msgs.msg import Header
 from trajectory_msgs.msg import JointTrajectory
 from trajectory_msgs.msg import JointTrajectoryPoint
+
+
+tracker = Tracker()
 
 
 
@@ -41,6 +42,8 @@ class ur5_mp:
     def __init__(self):
         rospy.init_node("ur5_mp", anonymous=False)
         self.cxy_sub = rospy.Subscriber('cxy', Tracker, self.tracking_callback, queue_size=1)
+        self.cxy_pub = rospy.Publisher('cxy', Tracker, queue_size=1)
+        self.phase = 1
 
         self.track_flag = False
         self.default_pose_flag = True
@@ -75,8 +78,8 @@ class ur5_mp:
         self.arm.set_goal_position_tolerance(0.01)
         self.arm.set_goal_orientation_tolerance(0.1)
         self.arm.set_planning_time(0.1)
-        self.arm.set_max_acceleration_scaling_factor(1)
-        self.arm.set_max_velocity_scaling_factor(1)
+        self.arm.set_max_acceleration_scaling_factor(.2)
+        self.arm.set_max_velocity_scaling_factor(.4)
 
         # Get the current pose so we can add it as a waypoint
         start_pose = self.arm.get_current_pose(self.end_effector_link).pose
@@ -101,9 +104,9 @@ class ur5_mp:
         wpose.position.z = 0.4005
 
         wpose.orientation.x = 0.4811
-        wpose.orientation.y = 0.4994
-        wpose.orientation.z = -0.5121
-        wpose.orientation.w = 0.5069
+        wpose.orientation.y = 0.5070
+        wpose.orientation.z = -0.5047
+        wpose.orientation.w = 0.5000
 
         self.waypoints.append(deepcopy(wpose))
 
@@ -158,6 +161,7 @@ class ur5_mp:
         moveit_commander.os._exit(0)
 
     def tracking_callback(self, msg):
+
         self.track_flag = msg.flag1
         self.cx = msg.x
         self.cy = msg.y
@@ -165,6 +169,8 @@ class ur5_mp:
         self.error_y = msg.error_y
         if len(self.pointx)>9:
             self.track_flag = True
+        if
+
         if (self.track_flag and -0.4 < self.waypoints[0].position.x and self.waypoints[0].position.x < 0.6):
             self.execute()
             self.default_pose_flag = False
@@ -179,6 +185,7 @@ class ur5_mp:
     def execute(self):
         if self.track_flag:
 
+
             # Get the current pose so we can add it as a waypoint
             start_pose = self.arm.get_current_pose(self.end_effector_link).pose
 
@@ -189,52 +196,78 @@ class ur5_mp:
             # Append the pose to the waypoints list
             wpose = deepcopy(start_pose)
 
+            # wpose.position.x = -0.5215
+            # wpose.position.y = 0.2014
+            # wpose.position.z = 0.4102
+
+
             if len(self.pointx)>8:
                 if len(self.pointx)==9:
                     x_speed = np.mean(np.asarray(self.pointx[4:8]) - np.asarray(self.pointx[3:7]))
                     wpose.position.x += 2 * x_speed
-                else:
-                    x_speed = np.mean(np.asarray(self.pointx[4:8])-np.asarray(self.pointx[3:7]))
-                    wpose.position.x += (x_speed-self.error_x*0.025/105)
+                    wpose.position.z = 0.05
 
-                wpose.position.z = 0.05
+
+                else:
+                    tracker.flag2 = True
+                    self.cxy_pub.publish(tracker)
+
+                    if len(self.pointx)<13:
+                        x_speed = np.mean(np.asarray(self.pointx[4:8])-np.asarray(self.pointx[3:7]))
+                        wpose.position.x += (x_speed-self.error_x*0.025/105)
+
+                    else:
+                        drop_pose = deepcopy(start_pose)
+                        drop_pose.position.x = -0.5215
+                        drop_pose.position.y = 0.2014
+                        drop_pose.position.z = 0.4102
+                        seq_y = np.arange(start_pose.position.y,drop_pose.position.y+0.03, 0.03)
+                        dx = np.linspace(start_pose.position.x,drop_pose.position.x, len(seq_y))
+                        dz = np.linspace(start_pose.position.z,drop_pose.position.z, len(seq_y))
+                        for _ in range(len(seq_y)):
+                            wpose.position.x += dx
+                            wpose.position.y += 0.03
+                            wpose.position.z += dz
+                        self.waypoints.append(deepcopy(wpose))
+                        self.arm.set_start_state_to_current_state()
+                        plan, fraction = self.arm.compute_cartesian_path(self.waypoints, 0.01, 0.0, True)
+
+                        self.phase = 2
 
 
             # Set the next waypoint to the right 0.5 meters
             else:
                 wpose.position.x -= self.error_x*0.08/105
                 wpose.position.y += self.error_y*0.04/105
-                wpose.position.z = 0.20
+                wpose.position.z = 0.15
                 #wpose.position.z = 0.4005
 
-            wpose.orientation.x = 0.4811
-            wpose.orientation.y = 0.4994
-            wpose.orientation.z = -0.5121
-            wpose.orientation.w = 0.5069
+            if self.phase == 1:
+                self.waypoints.append(deepcopy(wpose))
 
 
-            self.waypoints.append(deepcopy(wpose))
-            self.pointx.append(wpose.position.x)
-            self.pointy.append(wpose.position.y)
+                self.pointx.append(wpose.position.x)
+                self.pointy.append(wpose.position.y)
 
-            # Set the internal state to the current state
-            # self.arm.set_pose_target(wpose)
+                # Set the internal state to the current state
+                # self.arm.set_pose_target(wpose)
 
-            self.arm.set_start_state_to_current_state()
+                self.arm.set_start_state_to_current_state()
 
-            # Plan the Cartesian path connecting the waypoints
+                # Plan the Cartesian path connecting the waypoints
 
-            """moveit_commander.move_group.MoveGroupCommander.compute_cartesian_path(
-                    self, waypoints, eef_step, jump_threshold, avoid_collisios= True)
+                """moveit_commander.move_group.MoveGroupCommander.compute_cartesian_path(
+                        self, waypoints, eef_step, jump_threshold, avoid_collisios= True)
+    
+                   Compute a sequence of waypoints that make the end-effector move in straight line segments that follow the
+                   poses specified as waypoints. Configurations are computed for every eef_step meters;
+                   The jump_threshold specifies the maximum distance in configuration space between consecutive points
+                   in the resultingpath. The return value is a tuple: a fraction of how much of the path was followed,
+                   the actual RobotTrajectory.
+    
+                """
+                plan, fraction = self.arm.compute_cartesian_path(self.waypoints, 0.01, 0.0, True)
 
-               Compute a sequence of waypoints that make the end-effector move in straight line segments that follow the
-               poses specified as waypoints. Configurations are computed for every eef_step meters;
-               The jump_threshold specifies the maximum distance in configuration space between consecutive points
-               in the resultingpath. The return value is a tuple: a fraction of how much of the path was followed,
-               the actual RobotTrajectory.
-
-            """
-            plan, fraction = self.arm.compute_cartesian_path(self.waypoints, 0.01, 0.0, True)
 
             # plan = self.arm.plan()
 
@@ -247,6 +280,7 @@ class ur5_mp:
                 rospy.loginfo("Path execution complete.")
             else:
                 rospy.loginfo("Path planning failed")
+
         else:
             # Get the current pose so we can add it as a waypoint
             start_pose = self.arm.get_current_pose(self.end_effector_link).pose

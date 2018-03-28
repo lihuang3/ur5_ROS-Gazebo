@@ -89,7 +89,7 @@
       /*red_inXml.open(red_box_path.c_str());*/
       red_strStream << red_inXml.rdbuf();
       red_xmlStr = red_strStream.str();
-      ROS_INFO_STREAM("urdf: \n" <<red_xmlStr);
+     // ROS_INFO_STREAM("urdf: \n" <<red_xmlStr);
       // prepare the pawn model service message
       spawn_model_req.initial_pose.position.x = 4.5;
       spawn_model_req.initial_pose.position.z = 0.2;
@@ -101,7 +101,7 @@
 
       ros::Time time_temp(0, 0);
       ros::Duration duration_temp(0, 1000000);
-      apply_wrench_req.wrench.force.x = -0.001;
+      apply_wrench_req.wrench.force.x = -10;
       apply_wrench_req.wrench.force.y = 0.0;
       apply_wrench_req.wrench.force.z = 0.0;
       apply_wrench_req.start_time = time_temp;

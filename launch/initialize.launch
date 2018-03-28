@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <launch>
-  <param name="red_box_path" type="str" value="/home/haoran/ros_hw/src/ur5_notebook/urdf/red_box.urdf"/>
+  <param name="red_box_path" type="str" value="/home/lihuang/ur5_ws/src/ur5_notebook/urdf/red_box.urdf"/>
 
   <arg name="limited" default="true"/>
   <arg name="paused" default="false"/>
@@ -48,7 +48,6 @@
 
   <!-- the cylinder poses publisher node -->
   <node name="ur5_vision" pkg="ur5_notebook" type="ur5_vision.py" output="screen" />
-  <!-- the cylinder poses publisher node -->
   <node name="ur5_mp" pkg="ur5_notebook" type="ur5_mp.py" output="screen" />
   <!-- for ros control to be used with scara robot -->
 <!--   <param name="/scara_robot_left/robot_description" textfile="$(find two_scara_collaboration)/urdf/scara_robot_left.urdf" /> -->

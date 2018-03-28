@@ -77,13 +77,12 @@ class ur5_vision:
         #  biggest_contour = max(contour_sizes, key=lambda x: x[0])[1]
             for i, c in enumerate(cnts):
                 area = cv2.contourArea(c)
-
                 if area > 7500:
                     self.track_flag = True
                     self.cx = cx
                     self.cy = cy
                     self.error_x = self.cx - w/2
-                    self.error_y = self.cy - (h/2+130)
+                    self.error_y = self.cy - (h/2+185)
                     tracker.x = cx
                     tracker.y = cy
                     tracker.flag1 = self.track_flag

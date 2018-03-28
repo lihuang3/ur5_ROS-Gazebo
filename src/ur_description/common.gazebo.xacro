@@ -6,6 +6,8 @@
       <!--robotNamespace>/</robotNamespace-->
       <!--robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType-->
     </plugin>
+    
+
 
 <!--
     <plugin name="gazebo_ros_power_monitor_controller" filename="libgazebo_ros_power_monitor.so">
@@ -21,7 +23,13 @@
       <chargeVoltage>16.41</chargeVoltage>
     </plugin>
 -->
+     	
   </gazebo>
+  
+
+
+
+
   <!-- camera_link -->
   <gazebo reference="camera_link">
     <mu1>0.2</mu1>
