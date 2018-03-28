@@ -83,7 +83,8 @@ class ur5_mp:
 
         # Initialize the waypoints list
         self.waypoints= []
-
+        self.pointx = []
+        self.pointy = []
         # Set the first waypoint to be the starting pose
         # Append the pose to the waypoints list
         wpose = deepcopy(start_pose)
@@ -105,6 +106,7 @@ class ur5_mp:
         wpose.orientation.w = 0.5069
 
         self.waypoints.append(deepcopy(wpose))
+
 
         if np.sqrt((wpose.position.x-start_pose.position.x)**2+(wpose.position.x-start_pose.position.x)**2 \
             +(wpose.position.x-start_pose.position.x)**2)<0.1:
@@ -161,7 +163,8 @@ class ur5_mp:
         self.cy = msg.y
         self.error_x = msg.error_x
         self.error_y = msg.error_y
-
+        if len(self.pointx)>9:
+            self.track_flag = True
         if (self.track_flag and -0.4 < self.waypoints[0].position.x and self.waypoints[0].position.x < 0.6):
             self.execute()
             self.default_pose_flag = False
@@ -186,12 +189,23 @@ class ur5_mp:
             # Append the pose to the waypoints list
             wpose = deepcopy(start_pose)
 
-            # Set the next waypoint to the right 0.5 meters
+            if len(self.pointx)>8:
+                if len(self.pointx)==9:
+                    x_speed = np.mean(np.asarray(self.pointx[4:8]) - np.asarray(self.pointx[3:7]))
+                    wpose.position.x += 2 * x_speed
+                else:
+                    x_speed = np.mean(np.asarray(self.pointx[4:8])-np.asarray(self.pointx[3:7]))
+                    wpose.position.x += (x_speed-self.error_x*0.025/105)
 
-            wpose.position.x -= self.error_x*0.08/105
-            wpose.position.y += self.error_y*0.04/105
-            wpose.position.z = 0.20
-            #wpose.position.z = 0.4005
+                wpose.position.z = 0.05
+
+
+            # Set the next waypoint to the right 0.5 meters
+            else:
+                wpose.position.x -= self.error_x*0.08/105
+                wpose.position.y += self.error_y*0.04/105
+                wpose.position.z = 0.20
+                #wpose.position.z = 0.4005
 
             wpose.orientation.x = 0.4811
             wpose.orientation.y = 0.4994
@@ -200,7 +214,8 @@ class ur5_mp:
 
 
             self.waypoints.append(deepcopy(wpose))
-            self.points.append(deepcopy(wpose))
+            self.pointx.append(wpose.position.x)
+            self.pointy.append(wpose.position.y)
 
             # Set the internal state to the current state
             # self.arm.set_pose_target(wpose)
@@ -238,7 +253,8 @@ class ur5_mp:
 
             # Initialize the waypoints list
             self.waypoints= []
-
+            self.pointx = []
+            self.pointy = []
             # Set the first waypoint to be the starting pose
             # Append the pose to the waypoints list
             wpose = deepcopy(start_pose)
@@ -254,7 +270,8 @@ class ur5_mp:
             wpose.orientation.z = -0.5121
             wpose.orientation.w = 0.5069
 
-            self.points.append(deepcopy(wpose))
+            self.pointx.append(wpose.position.x)
+            self.pointy.append(wpose.position.y)
             self.waypoints.append(deepcopy(wpose))
             # Set the internal state to the current state
             # self.arm.set_pose_target(wpose)
