@@ -211,19 +211,19 @@ class ur5_mp:
 
 
                 else:
-                    if len(self.pointx)==12:
+                    if len(self.pointx)==11:
                         tracker.flag2 = 1
                         self.cxy_pub.publish(tracker)
 
-                    if len(self.pointx)<14:
+                    if len(self.pointx)<12:
                         x_speed = np.mean(np.asarray(self.pointx[4:8])-np.asarray(self.pointx[3:7]))
                         wpose.position.x += (x_speed-self.error_x*0.015/105)
 
                     else:
                         drop_pose = deepcopy(start_pose)
-                        drop_pose.position.x = -0.600
-                        drop_pose.position.y = 0.6000
-                        drop_pose.position.z = 0.5000
+                        drop_pose.position.x = -0.700
+                        drop_pose.position.y = 0.9000
+                        drop_pose.position.z = 0.6000
                         # seq_y = np.arange(start_pose.position.y,drop_pose.position.y+0.03, 0.03)
                         # dx = np.linspace(start_pose.position.x,drop_pose.position.x, len(seq_y))
                         # dz = np.linspace(start_pose.position.z,drop_pose.position.z, len(seq_y))
@@ -265,13 +265,13 @@ class ur5_mp:
 
                 """moveit_commander.move_group.MoveGroupCommander.compute_cartesian_path(
                         self, waypoints, eef_step, jump_threshold, avoid_collisios= True)
-    
+
                    Compute a sequence of waypoints that make the end-effector move in straight line segments that follow the
                    poses specified as waypoints. Configurations are computed for every eef_step meters;
                    The jump_threshold specifies the maximum distance in configuration space between consecutive points
                    in the resultingpath. The return value is a tuple: a fraction of how much of the path was followed,
                    the actual RobotTrajectory.
-    
+
                 """
                 plan, fraction = self.arm.compute_cartesian_path(self.waypoints, 0.01, 0.0, True)
 
