@@ -101,7 +101,7 @@
 
       ros::Time time_temp(0, 0);
       ros::Duration duration_temp(0, 1000000);
-      apply_wrench_req.wrench.force.x = -10;
+      apply_wrench_req.wrench.force.x = -5.5;
       apply_wrench_req.wrench.force.y = 0.0;
       apply_wrench_req.wrench.force.z = 0.0;
       apply_wrench_req.start_time = time_temp;

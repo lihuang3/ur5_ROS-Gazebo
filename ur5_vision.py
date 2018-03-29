@@ -82,7 +82,7 @@ class ur5_vision:
                     self.cx = cx
                     self.cy = cy
                     self.error_x = self.cx - w/2
-                    self.error_y = self.cy - (h/2+185)
+                    self.error_y = self.cy - (h/2+195)
                     tracker.x = cx
                     tracker.y = cy
                     tracker.flag1 = self.track_flag

@@ -25,7 +25,7 @@
 import rospy, sys, numpy as np
 import moveit_commander
 from copy import deepcopy
-import geometry_msgs.msg
+from geometry_msgs.msg import Twist
 import moveit_msgs.msg
 from sensor_msgs.msg import Image
 from ur5_notebook.msg import Tracker
@@ -42,7 +42,7 @@ class ur5_mp:
     def __init__(self):
         rospy.init_node("ur5_mp", anonymous=False)
         self.cxy_sub = rospy.Subscriber('cxy', Tracker, self.tracking_callback, queue_size=1)
-        self.cxy_pub = rospy.Publisher('cxy', Tracker, queue_size=1)
+        self.cxy_pub = rospy.Publisher('cxy1', Tracker, queue_size=1)
         self.phase = 1
 
         self.track_flag = False
@@ -169,7 +169,9 @@ class ur5_mp:
         self.error_y = msg.error_y
         if len(self.pointx)>9:
             self.track_flag = True
-        if
+        if self.phase == 2:
+            self.track_flag = False
+            self.phase = 1
 
         if (self.track_flag and -0.4 < self.waypoints[0].position.x and self.waypoints[0].position.x < 0.6):
             self.execute()
@@ -209,35 +211,40 @@ class ur5_mp:
 
 
                 else:
-                    tracker.flag2 = True
-                    self.cxy_pub.publish(tracker)
+                    if len(self.pointx)==12:
+                        tracker.flag2 = 1
+                        self.cxy_pub.publish(tracker)
 
-                    if len(self.pointx)<13:
+                    if len(self.pointx)<14:
                         x_speed = np.mean(np.asarray(self.pointx[4:8])-np.asarray(self.pointx[3:7]))
-                        wpose.position.x += (x_speed-self.error_x*0.025/105)
+                        wpose.position.x += (x_speed-self.error_x*0.015/105)
 
                     else:
                         drop_pose = deepcopy(start_pose)
-                        drop_pose.position.x = -0.5215
-                        drop_pose.position.y = 0.2014
-                        drop_pose.position.z = 0.4102
-                        seq_y = np.arange(start_pose.position.y,drop_pose.position.y+0.03, 0.03)
-                        dx = np.linspace(start_pose.position.x,drop_pose.position.x, len(seq_y))
-                        dz = np.linspace(start_pose.position.z,drop_pose.position.z, len(seq_y))
-                        for _ in range(len(seq_y)):
-                            wpose.position.x += dx
-                            wpose.position.y += 0.03
-                            wpose.position.z += dz
-                        self.waypoints.append(deepcopy(wpose))
+                        drop_pose.position.x = -0.600
+                        drop_pose.position.y = 0.6000
+                        drop_pose.position.z = 0.5000
+                        # seq_y = np.arange(start_pose.position.y,drop_pose.position.y+0.03, 0.03)
+                        # dx = np.linspace(start_pose.position.x,drop_pose.position.x, len(seq_y))
+                        # dz = np.linspace(start_pose.position.z,drop_pose.position.z, len(seq_y))
+                        # for _ in range(len(seq_y)):
+                        #     wpose.position.x += dx[1]-dx[0]
+                        #     wpose.position.y += 0.03
+                        #     wpose.position.z += dz[1]-dz[0]
+                        self.waypoints.append(deepcopy(drop_pose))
                         self.arm.set_start_state_to_current_state()
-                        plan, fraction = self.arm.compute_cartesian_path(self.waypoints, 0.01, 0.0, True)
+                        plan, fraction = self.arm.compute_cartesian_path(self.waypoints, 0.02, 0.0, True)
+                        self.arm.execute(plan)
 
                         self.phase = 2
+                        tracker.flag2 = 0
+                        self.cxy_pub.publish(tracker)
+                        #
 
 
             # Set the next waypoint to the right 0.5 meters
             else:
-                wpose.position.x -= self.error_x*0.08/105
+                wpose.position.x -= self.error_x*0.05/105
                 wpose.position.y += self.error_y*0.04/105
                 wpose.position.z = 0.15
                 #wpose.position.z = 0.4005
@@ -269,17 +276,17 @@ class ur5_mp:
                 plan, fraction = self.arm.compute_cartesian_path(self.waypoints, 0.01, 0.0, True)
 
 
-            # plan = self.arm.plan()
+                # plan = self.arm.plan()
 
-            # If we have a complete plan, execute the trajectory
-            if 1-fraction < 0.2:
-                rospy.loginfo("Path computed successfully. Moving the arm.")
-                num_pts = len(plan.joint_trajectory.points)
-                rospy.loginfo("\n# intermediate waypoints = "+str(num_pts))
-                self.arm.execute(plan)
-                rospy.loginfo("Path execution complete.")
-            else:
-                rospy.loginfo("Path planning failed")
+                # If we have a complete plan, execute the trajectory
+                if 1-fraction < 0.2:
+                    rospy.loginfo("Path computed successfully. Moving the arm.")
+                    num_pts = len(plan.joint_trajectory.points)
+                    rospy.loginfo("\n# intermediate waypoints = "+str(num_pts))
+                    self.arm.execute(plan)
+                    rospy.loginfo("Path execution complete.")
+                else:
+                    rospy.loginfo("Path planning failed")
 
         else:
             # Get the current pose so we can add it as a waypoint
@@ -342,6 +349,7 @@ class ur5_mp:
 
 
 
-tracker=ur5_mp()
+
+mp=ur5_mp()
 
 rospy.spin()
