@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <launch>
-  <param name="red_box_path" type="str" value="/home/lihuang/ur5_ws/src/ur5_notebook/urdf/red_box.urdf"/>
+  <param name="red_box_path" type="str" value="/home/haoran/ros_hw/src/ur5_notebook/urdf/red_box.urdf"/>
 
   <arg name="limited" default="true"/>
   <arg name="paused" default="false"/>
@@ -40,7 +40,9 @@
 
   <!-- spawn the conveyor_belt in gazebo -->
   <node name="spawn_conveyor_belt" pkg="gazebo_ros" type="spawn_model" args="-file $(find ur5_notebook)/urdf/conveyor_belt.urdf -urdf -model conveyor_belt" />
-  <!-- the cylinder blocks spawner node -->
+  <!-- spawn the conveyor_belt in gazebo -->
+  <node name="bin" pkg="gazebo_ros" type="spawn_model" args="-file $(find ur5_notebook)/urdf/bin.urdf -urdf -model bin -y 0.8 -x -0.5 -z 0.05" />
+  <!-- the red blocks spawner node -->
   <node name="blocks_spawner" pkg="ur5_notebook" type="blocks_spawner" output="screen" />
 
   <!-- the cylinder poses publisher node -->
