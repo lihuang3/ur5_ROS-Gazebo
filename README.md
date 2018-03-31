@@ -266,3 +266,7 @@ rosservice call /gazebo/set_model_state '{model_state: { model_name: red_box, po
 
 - [`cv2.contourArea() examples
 `](https://www.programcreek.com/python/example/86843/cv2.contourArea)
+
+##### 7. ariac
+- [`ARIAC 2017: INSTALL 4.2 4.3
+`](http://wiki.ros.org/ariac/Tutorials/SystemSetup)
