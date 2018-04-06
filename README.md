@@ -12,6 +12,10 @@ python testvisionplanner.py
 - [__`GitHub: utecrobotics/ur5`__](https://github.com/utecrobotics/ur5) testing ur5 motion
 - [__`Very useful ROS blog`__](http://www.guyuehome.com/column/ros-explore) ROS探索
 - [__`ROS下如何使用moveit驱动UR5机械臂`__](http://blog.csdn.net/jayandchuxu/article/details/54693870)
+- [__`ROS UR industrial`__](http://wiki.ros.org/universal_robot/Tutorials/Getting%20Started%20with%20a%20Universal%20Robot%20and%20ROS-Industrial)
+- [__`ROS modern driver`__](https://github.com/iron-ox/ur_modern_driver)
+- [__`ur_hardware_interface.cpp`__](https://github.com/iron-ox/ur_modern_driver/blob/883070d0b6c0c32b78bb1ca7155b8f3a1ead416c/src/ur_hardware_interface.cpp) Replace this cpp
+if there is hardware interface error during catkin make
 
 #### 1. Universal Robot 5 Installation
 [`Official installation tutorial`](http://wiki.ros.org/universal_robot)
