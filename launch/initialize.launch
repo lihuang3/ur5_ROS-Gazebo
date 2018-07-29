@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <launch>
-  <param name="red_box_path" type="str" value="/home/haoran/ros_hw/src/ur5_notebook/urdf/red_box.urdf"/>
+  <param name="red_box_path" type="str" value="$(find ur5_notebook)/urdf/red_box.urdf"/>
 
   <arg name="limited" default="true"/>
   <arg name="paused" default="false"/>
