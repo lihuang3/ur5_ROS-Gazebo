@@ -1,3 +1,6 @@
+[`Simulation video`](https://youtu.be/Yj5DEocFa48)
+[`Hardware video`](https://youtu.be/FAYPbAhYoXw)
+
 open sequence:
 launch gazebo files :
 ```angularjs
@@ -7,8 +10,7 @@ cd python node folder:
 ```angularjs
 python testvisionplanner.py
 ```
-[`Simulation video`](https://youtu.be/Yj5DEocFa48)
-[`Hardware video`](https://youtu.be/FAYPbAhYoXw)
+
 
 #### 0. References
 - [__`GitHub: utecrobotics/ur5`__](https://github.com/utecrobotics/ur5) testing ur5 motion
