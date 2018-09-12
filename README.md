@@ -1,6 +1,8 @@
 [`Simulation video`](https://youtu.be/Yj5DEocFa48)
 [`Hardware video`](https://youtu.be/FAYPbAhYoXw)
 
+[`Hardware implementation in UR3`](https://github.com/lihuang3/ur3_ROS-hardware.git)
+
 open sequence:
 launch gazebo files :
 ```angularjs
