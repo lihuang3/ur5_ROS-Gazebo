@@ -9,20 +9,20 @@
 - Update: based on feebacks from the community, we have made several key changes to this repository on 09/16/2018. Please update your code in case you have trouble to reproduce the results.
 
 - How to cite this repository: 
-```
-Huang, L., Zhao, H., Implementation of UR5 pick and place in ROS-Gazebo with a USB cam and vacuum grippers, (2018), GitHub repository, https://github.com/lihuang3/ur5_ROS-Gazebo.git
-```
+  ```
+    Huang, L., Zhao, H., Implementation of UR5 pick and place in ROS-Gazebo with a USB cam and vacuum grippers, (2018), GitHub repository, https://github.com/lihuang3/ur5_ROS-Gazebo.git
+  ```
 or BibTex
-```
-@misc{Huang2018,
-  author = {Huang, L., Zhao, H.},
-  title = {Implementation of UR5 pick and place in ROS-Gazebo with a USB cam and vacuum grippers},
-  year = {2018},
-  publisher = {GitHub},
-  journal = {GitHub repository},
-  howpublished = {\url{https://github.com/lihuang3/ur3_ROS-hardware.git}}
-}
-```
+  ```
+  @misc{Huang2018,
+    author = {Huang, L., Zhao, H.},
+    title = {Implementation of UR5 pick and place in ROS-Gazebo with a USB cam and vacuum grippers},
+    year = {2018},
+    publisher = {GitHub},
+    journal = {GitHub repository},
+    howpublished = {\url{https://github.com/lihuang3/ur3_ROS-hardware.git}}
+  }
+  ```
 
 #### How to use this repository
 - This project was tested in Ubuntu 16.04 with ROS kinetic.
