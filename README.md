@@ -3,6 +3,8 @@
 <img src="https://github.com/lihuang3/ur5_notebook/blob/master/media/demo1.gif" width="400">
 <img src="https://github.com/lihuang3/ur5_notebook/blob/master/media/demo2.gif" width="405">
 
+This repository demonstrates UR5 pick-and-place in ROS Gazebo. The UR5 uses a USB cam to detect a red box on a convayor ([`ur5_vision.py`](ur5_ROS-Gazebo/ur5_vision.py)), and publish its position. UR5 plans its motion ([`ur5_mp.py`](ur5_ROS-Gazebo/ur5_mp.py)) to follow the box. Once the end-effector gets close enough to the box, it approaches the box with vacuum grippers turning on ([`ur5_gripper.py`](ur5_ROS-Gazebo/ur5_gripper.py)). Since the vacuum gripper only provides limited force, we placed multiple grippers in order to lift the object. 
+
 - Video demos:
   [`Simulation video`](https://youtu.be/Yj5DEocFa48)
   [`Hardware video`](https://youtu.be/FAYPbAhYoXw)
@@ -54,6 +56,8 @@ Under directory `ur_ws/src/ur5_ROS-Gazebo/src/ur_description/`, copy `common.gaz
   ```
   $ roslaunch ur5_notebook initialize.launch 
   ```
+- Things to work on: (1) vacuum grippers only provide limited force for lifting, so we had to use so many of them in order to pick up a light box. If you have any suggestions, please let us know. (2) UR5 motion planning is not in realtime, and hence you can ovserve a non-smooth motion of the end-effect in the camera view. 
+ 
 
 #### 0. References
 - [__`GitHub: utecrobotics/ur5`__](https://github.com/utecrobotics/ur5) testing ur5 motion
@@ -65,7 +69,11 @@ Under directory `ur_ws/src/ur5_ROS-Gazebo/src/ur_description/`, copy `common.gaz
 if there is hardware interface error during catkin make
 
 
+
+
 __######## Warning! The rest of this repo is still under construction ###########__
+
+
 
 
 #### 1. Universal Robot 5 Installation
