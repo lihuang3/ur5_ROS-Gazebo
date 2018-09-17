@@ -1,15 +1,23 @@
-Implementation of UR5 pick and place in ROS-Gazebo with a USB cam and vacuum grippers. 
+### Implementation of UR5 pick and place in ROS-Gazebo with a USB cam and vacuum grippers. 
+- Video demos
 
 [`Simulation video`](https://youtu.be/Yj5DEocFa48)
 [`Hardware video`](https://youtu.be/FAYPbAhYoXw)
 
+- Hardware implementations
+
 [`Hardware implementation in UR3`](https://github.com/lihuang3/ur3_ROS-hardware.git)
+
+
+- Update
+Based on feebacks from the community, we have made several key changes to this repository on 09/16/2018. Please update your code in case you have trouble to reproduce the results.
+
 
 #### How to use this repository
 - This project was tested in Ubuntu 16.04 with ROS kinetic.
 - Make sure you have installed Python2.7 and some useful libraries/packages, such as Numpy, cv2, etc.
 - Install ROS kinetic, Gazebo, universal robot, Moveit, RViz. 
-- Assuming your universal robot workspace is named as `ur_ws`,
+- Assuming your universal robot workspace is named as `ur_ws`, download the repository to `ur_ws/src/`
   ```
   $ cd ur_ws/src
   $ git clone https://github.com/lihuang3/ur5_ROS-Gazebo.git
@@ -22,7 +30,7 @@ Implementation of UR5 pick and place in ROS-Gazebo with a USB cam and vacuum gri
 These two default files do not include camera and vacuum gripper modules. 
 So we would replace these two files with customized files. 
 Under directory `ur_ws/src/ur5_ROS-Gazebo/src/ur_description/`, copy `common.gazebo.xacro` and `ur5.urdf.xacro` to `ur_ws/src/universal_robot/ur_description/urdf/`.
-- Building code under directory `ur_ws/`,
+- Build the code under directory `ur_ws/`,
   ```
   $ catkin_make
   $ source devel/setup.bash  
