@@ -5,6 +5,21 @@ Implementation of UR5 pick and place in ROS-Gazebo with a USB cam and vacuum gri
 
 [`Hardware implementation in UR3`](https://github.com/lihuang3/ur3_ROS-hardware.git)
 
+#### How to use this repository
+- This project was tested in Ubuntu 16.04 with ROS kinetic.
+- Make sure you have installed Python2.7 and some useful libraries/packages, such as Numpy, cv2, etc.
+- Install ROS kinetic, Gazebo, universal robot, Moveit, RViz. 
+- Assuming your universal robot workspace is named as `ur_ws`,
+  ```
+  $ cd ur_ws/src
+  $ git clone https://github.com/lihuang3/ur5_ROS-Gazebo.git
+  ```
+- Under `ur_ws/src`, there are two folders: one is the official `universal_robot`, and the other ur5_ROS-Gazebo. Locate file `ur5_joint_limited_robot.urdf.xacro` under `ur_ws/src/universal_robot/ur_description/urdf/`, and make the following change:
+ ```
+  shoulder_pan_lower_limit="${-2*pi}" shoulder_pan_upper_limit="${2*pi}"
+ ```
+
+
 open sequence:
 launch gazebo files :
 ```angularjs
