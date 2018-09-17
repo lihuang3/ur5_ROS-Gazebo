@@ -24,7 +24,7 @@
       year = {2018},
       publisher = {GitHub},
       journal = {GitHub repository},
-      howpublished = {\url{https://github.com/lihuang3/ur3_ROS-hardware.git}}
+      howpublished = {\url{https://github.com/lihuang3/ur5_ROS-Gazebo.git}}
     }
   ```
 
