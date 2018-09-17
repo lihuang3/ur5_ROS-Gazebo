@@ -1,4 +1,14 @@
 ### Implementation of UR5 pick and place in ROS-Gazebo with a USB cam and vacuum grippers. 
+<p align="center">
+<img src="https://github.com/lihuang3/ur5_notebook/blob/master/media/demo1.gif" width="800">
+</p>
+
+<p align="center">
+<img src="https://github.com/lihuang3/ur5_notebook/blob/master/media/demo2.gif" width="800">
+</p>
+
+
+
 - Video demos:
   [`Simulation video`](https://youtu.be/Yj5DEocFa48)
   [`Hardware video`](https://youtu.be/FAYPbAhYoXw)
