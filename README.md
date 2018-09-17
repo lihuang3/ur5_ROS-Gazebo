@@ -18,19 +18,19 @@ Implementation of UR5 pick and place in ROS-Gazebo with a USB cam and vacuum gri
   ```
     shoulder_pan_lower_limit="${-2*pi}" shoulder_pan_upper_limit="${2*pi}"
   ```
-- In the same directory, make a cope of `common.gazebo.xacro`, and `ur5.urdf.xacro`. These two default files do not include camera and vacuum gripper modules. So we would replace these two files with customized files. Under directory `ur_ws/srcur5_ROS-Gazebo/src/ur_description/`, copy `common.gazebo.xacro` and `ur5.urdf.xacro` to `ur_ws/src/universal_robot/ur_description/urdf/`.
-
-
-open sequence:
-launch gazebo files :
-```angularjs
-roslaunch ur5_notebook initialize.launch
-```
-cd python node folder:
-```angularjs
-python testvisionplanner.py
-```
-
+- In the same directory, make a cope of `common.gazebo.xacro` and `ur5.urdf.xacro` in case of any malfunction. 
+These two default files do not include camera and vacuum gripper modules. 
+So we would replace these two files with customized files. 
+Under directory `ur_ws/src/ur5_ROS-Gazebo/src/ur_description/`, copy `common.gazebo.xacro` and `ur5.urdf.xacro` to `ur_ws/src/universal_robot/ur_description/urdf/`.
+- Building code under directory `ur_ws/`,
+  ```
+  $ catkin_make
+  $ source devel/setup.bash  
+  ```
+- Run the code with ROS and Gazebo
+  ```
+  $ roslaunch ur5_notebook initialize.launch 
+  ```
 
 #### 0. References
 - [__`GitHub: utecrobotics/ur5`__](https://github.com/utecrobotics/ur5) testing ur5 motion
