@@ -10,7 +10,7 @@
 - Hardware implementation in UR3:
   [`ur3_ROS-hardware`](https://github.com/lihuang3/ur3_ROS-hardware.git)
 
-- Update: based on feebacks from the community, we have made several key changes to this repository on 09/16/2018. Please update your code in case you have trouble to reproduce the results.
+- Update: based on feebacks from the community, we have made several key changes to this repository on 09/16/2018. Please update your code in case you have trouble reproducing the results.
 
 - How to cite this repository: 
   ```
