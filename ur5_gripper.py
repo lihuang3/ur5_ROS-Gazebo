@@ -12,7 +12,8 @@ from std_srvs.srv import Empty
 
 def gripper_status(msg):
     if msg.data:
-        print('gripper status = {}'.format(msg.data))
+        return True
+        # print('gripper status = {}'.format(msg.data))
 
 def gripper_on():
     # Wait till the srv is available
