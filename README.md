@@ -64,6 +64,10 @@ Under directory `ur_ws/src/ur5_ROS-Gazebo/src/ur_description/`, copy `common.gaz
 - [__`ur_hardware_interface.cpp`__](https://github.com/iron-ox/ur_modern_driver/blob/883070d0b6c0c32b78bb1ca7155b8f3a1ead416c/src/ur_hardware_interface.cpp) Replace this cpp
 if there is hardware interface error during catkin make
 
+
+__######## Warning! The rest of this repo is still under construction ###########__
+
+
 #### 1. Universal Robot 5 Installation
 [`Official installation tutorial`](http://wiki.ros.org/universal_robot)
 
