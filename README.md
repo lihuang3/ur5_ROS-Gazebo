@@ -43,7 +43,7 @@ This repository demonstrates UR5 pick-and-place in ROS and Gazebo. The UR5 uses 
   ```
     shoulder_pan_lower_limit="${-2*pi}" shoulder_pan_upper_limit="${2*pi}"
   ```
-- In the same directory, make a cope of `common.gazebo.xacro` and `ur5.urdf.xacro` in case of any malfunction. 
+- In the same directory, make a copy of `common.gazebo.xacro` and `ur5.urdf.xacro` in case of any malfunction. 
 These two default files do not include camera and vacuum gripper modules. 
 So we would replace these two files with customized files. 
 Under directory `ur_ws/src/ur5_ROS-Gazebo/src/ur_description/`, copy `common.gazebo.xacro` and `ur5.urdf.xacro` to `ur_ws/src/universal_robot/ur_description/urdf/`.
