@@ -71,7 +71,7 @@ if there is hardware interface error during catkin make
 
 
 
-__######## Warning! The rest of this repo is still under construction ###########__
+__######## Warning! The rest of this README is still under construction ###########__
 
 
 
