@@ -39,7 +39,7 @@ This repository demonstrates UR5 pick-and-place in ROS and Gazebo. The UR5 uses 
   $ cd ur_ws/src
   $ git clone https://github.com/lihuang3/ur5_ROS-Gazebo.git
   ```
-- Under `ur_ws/src`, there are two folders: one is the official `universal_robot`, and the other is `ur5_ROS-Gazebo`. Open file `ur5_joint_limited_robot.urdf.xacro` under `ur_ws/src/universal_robot/ur_description/urdf/`, and make the following change to the joint limit:
+- Under `ur_ws/src`, there are two folders: one is the official `universal_robot`, and the other is `ur5_ROS-Gazebo`. Open file `ur5_joint_limited_robot.urdf.xacro` under `ur_ws/src/universal_robot/ur_description/urdf/`, and __make the following change to the joint limit:__
   ```
     shoulder_pan_lower_limit="${-2*pi}" shoulder_pan_upper_limit="${2*pi}"
   ```
