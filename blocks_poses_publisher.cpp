@@ -11,7 +11,7 @@
 #include <string>
 #include <std_msgs/Int8MultiArray.h>
 #include <gazebo_msgs/ModelStates.h>
-#include <ur5_notebook/blocks_poses.h>
+#include "blocks_poses.h"
 
 // global variables
 int g_quantity;
