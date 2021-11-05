@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 """
     moveit_cartesian_path.py - Version 0.1 2016-07-28
@@ -135,7 +135,7 @@ class ur5_mp:
         self.arm.set_start_state_to_current_state()
         plan = self.arm.plan()
 
-        self.arm.execute(plan)
+        self.arm.execute(plan[1])
 
         # Specify end states (drop object)
         self.end_joint_states = deepcopy(self.default_joint_states)

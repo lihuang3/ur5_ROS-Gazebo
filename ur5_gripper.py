@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 
 
@@ -24,8 +24,8 @@ def gripper_on():
         # Use this handle just like a normal function and call it
         resp = turn_on()
         return resp
-    except rospy.ServiceException, e:
-        print "Service call failed: %s" % e
+    except rospy.ServiceException as e:
+        print("Service call failed: %s" % e)
 
 def gripper1_on():
     # Wait till the srv is available
@@ -36,8 +36,8 @@ def gripper1_on():
         # Use this handle just like a normal function and call it
         resp = turn_on()
         return resp
-    except rospy.ServiceException, e:
-        print "Service call failed: %s" % e
+    except rospy.ServiceException as e:
+        print("Service call failed: %s" % e)
 
 def gripper2_on():
     # Wait till the srv is available
@@ -48,8 +48,8 @@ def gripper2_on():
         # Use this handle just like a normal function and call it
         resp = turn_on()
         return resp
-    except rospy.ServiceException, e:
-        print "Service call failed: %s" % e
+    except rospy.ServiceException as e:
+        print("Service call failed: %s" % e)
 
 def gripper3_on():
     # Wait till the srv is available
@@ -60,8 +60,8 @@ def gripper3_on():
         # Use this handle just like a normal function and call it
         resp = turn_on()
         return resp
-    except rospy.ServiceException, e:
-        print "Service call failed: %s" % e
+    except rospy.ServiceException as e:
+        print("Service call failed: %s" % e)
 
 def gripper4_on():
     # Wait till the srv is available
@@ -72,8 +72,8 @@ def gripper4_on():
         # Use this handle just like a normal function and call it
         resp = turn_on()
         return resp
-    except rospy.ServiceException, e:
-        print "Service call failed: %s" % e
+    except rospy.ServiceException as e:
+        print("Service call failed: %s" % e)
 
 def gripper5_on():
     # Wait till the srv is available
@@ -84,8 +84,8 @@ def gripper5_on():
         # Use this handle just like a normal function and call it
         resp = turn_on()
         return resp
-    except rospy.ServiceException, e:
-        print "Service call failed: %s" % e
+    except rospy.ServiceException as e:
+        print("Service call failed: %s" % e)
 
 def gripper6_on():
     # Wait till the srv is available
@@ -96,8 +96,8 @@ def gripper6_on():
         # Use this handle just like a normal function and call it
         resp = turn_on()
         return resp
-    except rospy.ServiceException, e:
-        print "Service call failed: %s" % e
+    except rospy.ServiceException as e:
+        print("Service call failed: %s" % e)
 
 def gripper7_on():
     # Wait till the srv is available
@@ -108,8 +108,8 @@ def gripper7_on():
         # Use this handle just like a normal function and call it
         resp = turn_on()
         return resp
-    except rospy.ServiceException, e:
-        print "Service call failed: %s" % e
+    except rospy.ServiceException as e:
+        print("Service call failed: %s" % e)
 
 def gripper8_on():
     # Wait till the srv is available
@@ -120,8 +120,8 @@ def gripper8_on():
         # Use this handle just like a normal function and call it
         resp = turn_on()
         return resp
-    except rospy.ServiceException, e:
-        print "Service call failed: %s" % e
+    except rospy.ServiceException as e:
+        print("Service call failed: %s" % e)
 
 
 def gripper_off():
@@ -130,8 +130,8 @@ def gripper_off():
         turn_off = rospy.ServiceProxy('/ur5/vacuum_gripper/off', Empty)
         resp = turn_off()
         return resp
-    except rospy.ServiceException, e:
-        print "Service call failed: %s" % e
+    except rospy.ServiceException as e:
+        print("Service call failed: %s" % e)
 
 def gripper1_off():
     rospy.wait_for_service('/ur5/vacuum_gripper1/off')
@@ -139,8 +139,8 @@ def gripper1_off():
         turn_off = rospy.ServiceProxy('/ur5/vacuum_gripper1/off', Empty)
         resp = turn_off()
         return resp
-    except rospy.ServiceException, e:
-        print "Service call failed: %s" % e
+    except rospy.ServiceException as e:
+        print("Service call failed: %s" % e)
 
 def gripper2_off():
     rospy.wait_for_service('/ur5/vacuum_gripper2/off')
@@ -148,8 +148,8 @@ def gripper2_off():
         turn_off = rospy.ServiceProxy('/ur5/vacuum_gripper2/off', Empty)
         resp = turn_off()
         return resp
-    except rospy.ServiceException, e:
-        print "Service call failed: %s" % e
+    except rospy.ServiceException as e:
+        print("Service call failed: %s" % e)
 
 def gripper3_off():
     rospy.wait_for_service('/ur5/vacuum_gripper3/off')
@@ -157,8 +157,8 @@ def gripper3_off():
         turn_off = rospy.ServiceProxy('/ur5/vacuum_gripper3/off', Empty)
         resp = turn_off()
         return resp
-    except rospy.ServiceException, e:
-        print "Service call failed: %s" % e
+    except rospy.ServiceException as e:
+        print("Service call failed: %s" % e)
 
 def gripper4_off():
     rospy.wait_for_service('/ur5/vacuum_gripper4/off')
@@ -166,8 +166,8 @@ def gripper4_off():
         turn_off = rospy.ServiceProxy('/ur5/vacuum_gripper4/off', Empty)
         resp = turn_off()
         return resp
-    except rospy.ServiceException, e:
-        print "Service call failed: %s" % e
+    except rospy.ServiceException as e:
+        print("Service call failed: %s" % e)
 
 def gripper5_off():
     rospy.wait_for_service('/ur5/vacuum_gripper5/off')
@@ -175,8 +175,8 @@ def gripper5_off():
         turn_off = rospy.ServiceProxy('/ur5/vacuum_gripper5/off', Empty)
         resp = turn_off()
         return resp
-    except rospy.ServiceException, e:
-        print "Service call failed: %s" % e
+    except rospy.ServiceException as e:
+        print("Service call failed: %s" % e)
 
 def gripper6_off():
     rospy.wait_for_service('/ur5/vacuum_gripper6/off')
@@ -184,8 +184,8 @@ def gripper6_off():
         turn_off = rospy.ServiceProxy('/ur5/vacuum_gripper6/off', Empty)
         resp = turn_off()
         return resp
-    except rospy.ServiceException, e:
-        print "Service call failed: %s" % e
+    except rospy.ServiceException as e:
+        print("Service call failed: %s" % e)
 
 def gripper7_off():
     rospy.wait_for_service('/ur5/vacuum_gripper7/off')
@@ -193,8 +193,8 @@ def gripper7_off():
         turn_off = rospy.ServiceProxy('/ur5/vacuum_gripper7/off', Empty)
         resp = turn_off()
         return resp
-    except rospy.ServiceException, e:
-        print "Service call failed: %s" % e
+    except rospy.ServiceException as e:
+        print("Service call failed: %s" % e)
 
 def gripper8_off():
     rospy.wait_for_service('/ur5/vacuum_gripper8/off')
@@ -202,8 +202,8 @@ def gripper8_off():
         turn_off = rospy.ServiceProxy('/ur5/vacuum_gripper8/off', Empty)
         resp = turn_off()
         return resp
-    except rospy.ServiceException, e:
-        print "Service call failed: %s" % e
+    except rospy.ServiceException as e:
+        print("Service call failed: %s" % e)
 
 def trigger(msg):
     gripper_trigger = msg.flag2
