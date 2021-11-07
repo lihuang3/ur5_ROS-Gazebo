@@ -236,12 +236,12 @@ class ur5_mp:
                         self.arm.set_joint_value_target(self.transition_pose)
                         self.arm.set_start_state_to_current_state()
                         plan = self.arm.plan()
-                        self.arm.execute(plan)
+                        self.arm.execute(plan[1])
 
                         self.arm.set_joint_value_target(self.end_joint_states)
                         self.arm.set_start_state_to_current_state()
                         plan = self.arm.plan()
-                        self.arm.execute(plan)
+                        self.arm.execute(plan[1])
 
                         if -0.1+0.02*self.object_cnt<0.2:
                             self.object_cnt += 1
@@ -255,7 +255,7 @@ class ur5_mp:
 
                         self.arm.set_start_state_to_current_state()
                         plan, fraction = self.arm.compute_cartesian_path(self.waypoints, 0.02, 0.0, True)
-                        self.arm.execute(plan)
+                        self.arm.execute(plan[1])
 
                         self.phase = 2
                         tracker.flag2 = 0
@@ -304,7 +304,7 @@ class ur5_mp:
                     rospy.loginfo("Path computed successfully. Moving the arm.")
                     num_pts = len(plan.joint_trajectory.points)
                     rospy.loginfo("\n# intermediate waypoints = "+str(num_pts))
-                    self.arm.execute(plan)
+                    self.arm.execute(plan[1])
                     rospy.loginfo("Path execution complete.")
                 else:
                     rospy.loginfo("Path planning failed")
@@ -362,7 +362,7 @@ class ur5_mp:
                 rospy.loginfo("Path computed successfully. Moving the arm.")
                 num_pts = len(plan.joint_trajectory.points)
                 rospy.loginfo("\n# intermediate waypoints = "+str(num_pts))
-                self.arm.execute(plan)
+                self.arm.execute(plan[1])
                 rospy.loginfo("Path execution complete.")
             else:
                 rospy.loginfo("Path planning failed")
