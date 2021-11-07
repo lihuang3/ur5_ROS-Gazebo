@@ -1,6 +1,11 @@
 <?xml version="1.0"?>
 <launch>
   <param name="red_box_path" type="str" value="$(find ur5_notebook)/urdf/red_box.urdf"/>
+  <param name="blue_box_path" type="str" value="$(find ur5_notebook)/urdf/blue_box.urdf"/>
+  <param name="yellow_box_path" type="str" value="$(find ur5_notebook)/urdf/yellow_box.urdf"/>
+  <param name="red_cyl_path" type="str" value="$(find ur5_notebook)/urdf/red_cylinder.urdf"/>
+  <param name="blue_cyl_path" type="str" value="$(find ur5_notebook)/urdf/blue_cylinder.urdf"/>
+  <param name="yellow_cyl_path" type="str" value="$(find ur5_notebook)/urdf/yellow_cylinder.urdf"/>
 
   <arg name="limited" default="true"/>
   <arg name="paused" default="false"/>

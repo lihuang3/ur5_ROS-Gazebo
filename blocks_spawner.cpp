@@ -118,7 +118,7 @@
           ROS_INFO_STREAM("y position of new box: "
           << spawn_model_req.initial_pose.position.y);
 
-          model_name = "red_blocks_" + index;  // initialize model_name
+          model_name = "red_blocks__" + index;  // initialize model_name
           spawn_model_req.model_name = model_name;
           spawn_model_req.robot_namespace = model_name;
           spawn_model_req.model_xml = red_xmlStr;
