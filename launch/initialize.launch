@@ -45,8 +45,10 @@
 
   <!-- spawn the conveyor_belt in gazebo -->
   <node name="spawn_conveyor_belt" pkg="gazebo_ros" type="spawn_model" args="-file $(find ur5_notebook)/urdf/conveyor_belt.urdf -urdf -model conveyor_belt" />
-  <!-- spawn the conveyor_belt in gazebo -->
-  <node name="bin" pkg="gazebo_ros" type="spawn_model" args="-file $(find ur5_notebook)/urdf/bin.urdf -urdf -model bin -y 0.8 -x -0.5 -z 0.05" />
+  <!-- spawn the bin in gazebo -->
+  <node name="red_bin" pkg="gazebo_ros" type="spawn_model" args="-file $(find ur5_notebook)/urdf/red_bin.urdf -urdf -model red_bin -y 0.8 -x -0.5 -z 0.05" />
+  <node name="blue_bin" pkg="gazebo_ros" type="spawn_model" args="-file $(find ur5_notebook)/urdf/blue_bin.urdf -urdf -model blue_bin -y 1.2 -x 0.0 -z 0.05" />
+  <node name="yellow_bin" pkg="gazebo_ros" type="spawn_model" args="-file $(find ur5_notebook)/urdf/yellow_bin.urdf -urdf -model yellow_bin -y 0.8 -x 0.5 -z 0.05" />
   <!-- the red blocks spawner node -->
   <node name="blocks_spawner" pkg="ur5_notebook" type="blocks_spawner" output="screen" />
 
